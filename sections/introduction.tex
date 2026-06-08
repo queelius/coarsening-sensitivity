@@ -1,0 +1,76 @@
+\section{Introduction}
+\label{sec:intro}
+
+A latent quantity $\Y$ is often observed only through a coarsening: a mechanism
+that maps $\Y$ to a coarser report $R$ and discards the rest, so that the report
+identifies only a \emph{candidate set} $c(R)$ of latent values consistent with it.
+A failed component is reported as a set of suspects; a transcript count is reported
+after a dropout; a sensitive statistic is reported after calibrated noise; a label
+is reported as a vote of imperfect heuristics; a disease state is reported as a
+billing code. The coarsening-at-random conditions C1, C2, C3
+\citep{heitjan1991ignorability,gill1997coarsening,little2002statistical} say when
+the analyst may ignore the coarsening mechanism and maximize a face-value
+likelihood, and a companion synthesis \citep{towell2026synthesis} shows that, when
+they hold, one consistency identity and one rank condition govern identifiability
+across six fields, with a \emph{singleton} candidate set ($|c(R)| = 1$) restoring
+identifiability whenever it fails.
+
+That program assumes its conditions. The most fragile of the three is C2, the
+requirement that within a candidate set the coarsening probability does not depend
+on which admissible value is the true one. C2 is precisely the
+coarsened-data analogue of missing at random, and like missing at random it is
+\emph{informative when it fails and untestable from the observed data}
+\citep{grunwald2003updating,jaeger2005ignorability}. It also fails in exactly the
+way each application cares about: dropout depends on true expression, coding depends
+on true severity, data-dependent privacy mechanisms depend on the realized query,
+labeling functions are correlated through the true label, and masking is
+group-structured. Treating C2 as benign is therefore the program's main exposure,
+and the realistic regime is not C2 but a bounded violation of it.
+
+This paper develops the theory for that regime. We ask two questions. First, when
+C2 fails by a controlled amount, how wrong is the face-value fit, and what is the
+identified set for the latent parameter? Second, how much external information, in
+the form of singletons, is needed to buy identification back? The answers place the
+coarsening program in two older and deeper lineages it has not yet engaged:
+missing-not-at-random sensitivity analysis
+\citep{copas1997inference,manski1989anatomy,molenberghs2008every,daniels2008missing},
+where a bounded departure from ignorability yields an identified set rather than a
+point, and measurement-error double sampling and verification-bias correction
+\citep{tenenbein1970double,begg1983assessment,carroll2006measurement}, where a
+validation subsample, our singleton, restores identification. The singleton is
+classical internal validation; the C2 tilt is a structured sensitivity parameter.
+
+\subsection{Contributions}
+
+\begin{enumerate}[(i)]
+\item \textbf{A tilt parametrization of C2 violation} (\cref{sec:framework}).
+  We relax C2 to a log-linear tilt of magnitude $\delta$ over each candidate set,
+  recovering C2 at $\delta = 0$ and the informative-masking model of
+  \citet{towell2026mdrelax} as the reliability instance.
+\item \textbf{A sensitivity bound} (\cref{thm:sensitivity}, \cref{sec:sensitivity}).
+  The asymptotic bias of the face-value MLE is, to leading order, linear in
+  $\delta$ with an explicit constant: the inverse face-value information times the
+  covariance of the face-value score with the tilt. The latent parameter is
+  partially identified over a $\delta$-ball that contracts to a point as
+  $\delta \to 0$. In a regular exponential family the leading term is exact at
+  every $\delta$ along curved directions; the marginal-fit check that
+  \citet{towell2026synthesis} shows is blind to bias under C2 is exactly the
+  quantity the bound controls.
+\item \textbf{A singleton sample-complexity theorem}
+  (\cref{thm:restoration}, \cref{sec:restoration}). When the augmented
+  candidate-set matrix has rank deficit $r$, a set of singletons spanning the
+  deficient subspace restores point identification, and the number needed to
+  recover those $r$ directions to a target accuracy is of order $r / \gamma^2$,
+  where $\gamma$ is the domain's identification margin. This unifies the gold-set
+  rate of \citet{towell2026weaksupcoarsening} and the spike-in-fit bias of
+  \citet{towell2026scrnacoarsening} as one rate with a domain-specific margin.
+\item \textbf{Six domain instances} (\cref{sec:instances}) and a cross-domain
+  simulation (\cref{sec:validation}) showing the bias bound is tight and the
+  $r/\gamma^2$ rate holds across reliability, single-cell and spatial genomics,
+  differential privacy, weak supervision, and phenotyping.
+\end{enumerate}
+
+Together with \citet{towell2026synthesis}, which handles the C2-holds case, this is
+the second of two pillars: the synthesis says what is recoverable when coarsening is
+ignorable; this paper says how recovery degrades when it is not, and what restores
+it.

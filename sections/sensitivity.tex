@@ -1,0 +1,93 @@
+\section{How wrong is the face-value fit? A sensitivity bound}
+\label{sec:sensitivity}
+
+Let $s(r; \theta) = \partial_\theta \log \int_{c(r)} g(y \mid \theta)\, d\nu(y)$ be
+the face-value score (the gradient of a summand of \eqref{eq:facevalue}) and
+$\Info(\theta) = \E_\theta[\, s\, s^\top]$ the face-value information at $\delta =
+0$. The analyst fits the face-value model regardless of $\delta$, so $\hat\theta$
+solves $\sum_i s(R_i; \hat\theta) = 0$ while the reports are drawn from the
+$\delta$-tilted law of \cref{def:tilt}. This is a misspecified-MLE problem
+\citep{huber1967behavior,white1982maximum}: $\hat\theta \to_p \theta_\delta$, the
+solution of $\E_\delta[s(R; \theta_\delta)] = 0$, and $\theta_0 = \theta^\star$ is
+the truth.
+
+\begin{theorem}[Graceful degradation under C2 violation]
+\label{thm:sensitivity}
+Assume C1, C3, and $\mathrm{C2}(\delta)$ with tilt $h \in \mathcal{H}_\delta$, and
+the standard regularity that makes the face-value model a smooth, identifiable
+model at $\delta = 0$ with nonsingular $\Info(\theta^\star)$. Then the face-value
+pseudo-true parameter satisfies, as $\delta \to 0$,
+\begin{equation}
+  \theta_\delta - \theta^\star
+  \;=\; \delta\, \Info(\theta^\star)^{-1}\,
+        \Cov_{\theta^\star}\!\big(s(R; \theta^\star),\, h(R, Y)\big)
+  \;+\; O(\delta^2),
+  \label{eq:bias}
+\end{equation}
+where the covariance is taken over the joint law of $(Y, R)$ at $\delta = 0$. In
+particular the asymptotic bias is bounded by
+\begin{equation}
+  \|\theta_\delta - \theta^\star\|
+  \;\le\; \delta\, B(\theta^\star) + O(\delta^2),
+  \qquad
+  B(\theta^\star) = \big\|\Info(\theta^\star)^{-1}\big\|
+     \sup_{\|h\|_\infty \le 1}
+       \big\|\Cov_{\theta^\star}(s, h)\big\|,
+  \label{eq:Bdelta}
+\end{equation}
+with $B(\theta^\star) < \infty$ and $B$ independent of $\delta$. The bound is
+attained by the worst-case tilt aligned with the score.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Write $\Psi(\theta, \delta) = \E_\delta[s(R; \theta)]$, so $\theta_\delta$ solves
+$\Psi(\theta_\delta, \delta) = 0$ and $\Psi(\theta^\star, 0) = 0$ because the
+face-value model is correctly specified at $\delta = 0$. The implicit function
+theorem gives $d\theta_\delta/d\delta|_0 = -[\partial_\theta \Psi]^{-1}
+\partial_\delta \Psi$ at $(\theta^\star, 0)$. The $\theta$-derivative is the
+negative information, $\partial_\theta \Psi(\theta^\star, 0) = -\Info(\theta^\star)$
+(information equality at the well-specified point). For the $\delta$-derivative,
+differentiate the tilted report law $p_\delta(r \mid \theta) \propto \int_{c(r)}
+g(y \mid \theta)\, \kappa_0(r) e^{\delta h(r,y)}\, d\nu(y)$: $\partial_\delta \log
+p_\delta|_0$ is the within-candidate-set centered tilt, so $\partial_\delta
+\Psi(\theta^\star, 0) = \E_{\theta^\star}[\, s(R; \theta^\star)\, h(R, Y)\,] =
+\Cov_{\theta^\star}(s, h)$ using $\E[s] = 0$ at $\delta = 0$. Combining yields
+\eqref{eq:bias}; the bound \eqref{eq:Bdelta} is Cauchy--Schwarz over $\|h\|_\infty
+\le 1$, attained at $h \propto$ the conditional projection of $s$ onto
+within-candidate-set variation. Full regularity (uniform integrability of the
+remainder, a dominating envelope for the family $\{p_\delta\}$) is standard
+$M$-estimation and is deferred to the appendix.
+\end{proof}
+
+\begin{corollary}[Partial identification]
+\label{cor:partial}
+Under \cref{thm:sensitivity}, the identified set for $\theta^\star$ given the
+coarsened data and a tilt budget $\delta$ is, to first order, the ellipsoid
+\begin{equation}
+  \mathcal{I}_\delta
+  \;=\; \Big\{\, \hat\theta - \delta\, \Info^{-1}\Cov(s, h)
+        \;:\; \|h\|_\infty \le 1 \,\Big\} + o(\delta),
+\end{equation}
+centered at the face-value estimate, with radius $\delta B(\theta^\star)$. It
+contracts to the point $\{\theta^\star\}$ as $\delta \to 0$, recovering the
+point identification of \citet{towell2026synthesis} under C2.
+\end{corollary}
+
+\begin{remark}[What the marginal-fit check cannot see]
+\citet{towell2026synthesis} shows that under C2 the fitted mean of $\T$ equals its
+empirical mean, so a marginal-fit check is structurally blind to bias in the latent
+parameter. \Cref{thm:sensitivity} quantifies the blind spot: the bias direction
+$\Info^{-1}\Cov(s, h)$ is exactly the component of parameter error that leaves the
+fitted marginal of $\T$ unchanged, so a larger marginal fit is never reassurance
+against it. In a regular exponential family the leading term is exact along the
+curved directions at every $\delta$ (the report law stays an exponential family
+under the tilt, only with a $\delta$-shifted natural parameter), so
+\eqref{eq:bias} is not merely a small-$\delta$ approximation there; the
+location-family regime of \citet{towell2026synthesis} carries the usual
+$O_p(n^{-1/2})$ remainder on top.
+\end{remark}
+
+The bound is only useful if $\delta$ can be pinned or bypassed. It cannot be
+estimated from the coarsened data, so the next section supplies the external
+device, the singleton, that both bounds $\delta$ where it matters and restores point
+identification, and asks how much of it is needed.

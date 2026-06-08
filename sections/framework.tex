@@ -1,0 +1,66 @@
+\section{Coarsening, ignorability, and a tilt away from it}
+\label{sec:framework}
+
+\subsection{Setup}
+
+We use the abstract coarsening process of \citet{towell2026synthesis}. A latent
+variable $\Y \in \mathcal{Y}$ has density $g(y \mid \theta)$, $\theta \in \Theta
+\subseteq \R^p$. A coarsening mechanism emits a report $R$ with conditional law
+$\kappa(r \mid y)$, and the \emph{candidate set} of a report is $c(r) = \{ y :
+\kappa(r \mid y) > 0 \}$. The analyst sees $n$ independent reports and wants
+$\theta$. Write $\T : \mathcal{R} \to \R^d$ for the coarsening-sufficient statistic
+of \citet{towell2026synthesis} and $m(\theta) = \E_\theta[\T(R)]$ for its
+model-implied mean.
+
+The three coarsening-at-random conditions are: C1, the candidate set contains the
+truth ($\Prob_\theta\{\Y \in c(R)\} = 1$); C2, symmetric coarsening within the
+candidate set ($\kappa(r \mid y) = \kappa(r \mid y')$ for all $y, y' \in c(r)$);
+and C3, the coarsening law does not depend on $\theta$. Under C1, C2, C3 the common
+coarsening weight factors out and the analyst maximizes the face-value likelihood
+\begin{equation}
+  L(\theta) \;\propto\; \prod_{i=1}^n \int_{c(R_i)} g(y \mid \theta) \, d\nu(y),
+  \label{eq:facevalue}
+\end{equation}
+never modeling the mechanism \citep[Theorem on the C1--C2--C3
+likelihood]{towell2026masked}. At an interior maximizer the fitted mean of the
+coarsening-sufficient statistic equals its empirical mean, $m(\hat\theta) = \bar\T$
+\citep{towell2026synthesis}. We take \eqref{eq:facevalue} and this baseline as
+given and ask what happens to $\hat\theta$ when C2 fails.
+
+\subsection{A tilt parametrization of C2 violation}
+
+C2 says the within-candidate-set coarsening weight is flat. We relax it to a
+bounded log-linear tilt.
+
+\begin{definition}[$\delta$-tilted coarsening]
+\label{def:tilt}
+For $\delta \ge 0$, the coarsening satisfies $\mathrm{C2}(\delta)$ if for every
+report $r$ there is a bounded function $h(r, \cdot) : c(r) \to \R$ with
+$\sup_{y \in c(r)} |h(r,y)| \le 1$ and within-set mean zero under the fitted
+weighting, such that
+\begin{equation}
+  \kappa(r \mid y) \;=\; \kappa_0(r)\, \exp\{\delta\, h(r, y)\},
+  \qquad y \in c(r),
+  \label{eq:tilt}
+\end{equation}
+with $\kappa_0(r)$ the C2-symmetric part. We write $\mathcal{H}_\delta$ for the
+class of tilts of magnitude at most $\delta$ (all $h$ with $\|h\|_\infty \le 1$
+scaled by $\delta$), and retain C1 and C3 throughout.
+\end{definition}
+
+At $\delta = 0$, \eqref{eq:tilt} is C2 and the face-value MLE is consistent. For
+$\delta > 0$ the weight is informative: the report carries a $\theta$-correlated
+preference for some admissible latent values over others, and the factorization
+that licenses \eqref{eq:facevalue} no longer holds exactly. The magnitude $\delta$
+is a sensitivity parameter in the sense of \citet{copas1997inference} and
+\citet{manski1989anatomy}: it is not estimable from the coarsened data alone (C2 is
+untestable), so the honest output is an identified set indexed by $\delta$ together
+with the external information needed to collapse it.
+
+\Cref{def:tilt} specializes to the reliability informative-masking model of
+\citet{towell2026mdrelax}, where $h$ encodes a group-structured preference among
+masked components, and the discrete tilt is the relaxed candidate-set weight; that
+paper is the $\delta > 0$ reliability instance of the general theory below. The
+remaining domains supply their own $h$: dropout that increases with true
+expression, coding that increases with true severity, data-dependent privacy noise,
+and labeling-function correlation (\cref{sec:instances}).

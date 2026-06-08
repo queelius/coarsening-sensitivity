@@ -1,0 +1,33 @@
+\section{Validation}
+\label{sec:validation}
+
+Two predictions are checked by simulation: that the bias bound \eqref{eq:Bdelta}
+is tight (the realized bias grows linearly in $\delta$ at the predicted slope), and
+that the singleton sample complexity follows the $r/\gamma^2$ rate of
+\eqref{eq:samplecomplexity}. Both reuse the per-domain data-generating processes of
+the sibling papers, instrumented with the single tilt knob $\delta$ of
+\cref{def:tilt}; the shared harness is \texttt{scripts/sensitivity\_sweep.R}.
+
+\paragraph{Sensitivity sweep.} For each domain we draw data under
+$\mathrm{C2}(\delta)$ for a grid of $\delta$, fit the face-value MLE, and record the
+realized parameter bias against the first-order prediction $\delta\,
+\Info^{-1}\Cov(s, h)$ of \eqref{eq:bias}. The prediction is confirmed if the
+realized bias is linear in $\delta$ through the origin with slope matching the
+analytic constant, and if the realized identified set matches the ellipsoid of
+\cref{cor:partial}. The exponential-family domains (single-cell, spatial,
+phenotyping, the discrete weak-supervision parametrization) should track the
+prediction with no $O(\delta^2)$ curvature along the curved directions; the
+location-family domain (differential privacy) should track it up to the
+$O_p(n^{-1/2})$ remainder.
+
+\paragraph{Singleton sample complexity.} For a domain with a tunable rank deficit
+$r$ and margin $\gamma$ we add $n_{\mathrm{s}}$ singletons and record the restored
+parameter's squared error as a function of $n_{\mathrm{s}}$, $r$, and $\gamma$. The
+prediction \eqref{eq:samplecomplexity} is confirmed if the error scales as
+$1/n_{\mathrm{s}}$, the singletons needed for a fixed accuracy scale linearly in
+$r$, and the dependence on the margin is $\gamma^{-2}$. The weak-supervision
+$r$-sweep of \citet{towell2026weaksupcoarsening} is one already-reproduced slice of
+this surface.
+
+This section reports the harness output (figures and the fitted slopes) once the
+sweep has been run across the six domains.

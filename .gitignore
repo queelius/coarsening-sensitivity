@@ -1,0 +1,28 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+sections/*.aux
+
+# Built paper PDF (re-buildable via `make paper`)
+main.pdf
+
+# Computed simulation outputs (re-buildable via `make sim`)
+*.rds
+
+# R session state
+.Rhistory
+.RData
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store

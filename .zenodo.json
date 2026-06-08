@@ -1,0 +1,34 @@
+{
+  "title": "Identifiability under imperfect coarsening: sensitivity bounds and the singleton sample complexity that restores them",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p>Coarsening at random (the conditions C1, C2, C3) makes a latent parameter identifiable and the face-value maximum-likelihood fit consistent, but the symmetry condition C2 is the exception rather than the rule: real coarsening is informative. This paper develops the theory for imperfect coarsening.</p><p>We parametrize the violation of C2 by a tilt of magnitude delta and prove a sensitivity bound: the asymptotic bias of the face-value MLE is, at leading order, linear in delta with an explicit constant set by the covariance of the face-value score with the tilt, so the latent parameter is partially identified over a delta-ball that contracts to a point as C2 is approached. We then prove a restoration theorem: a singleton report (one that pins the latent value, hence classical internal validation) restores point identification, and the number of singletons needed to recover the r confounded directions is of order r over gamma-squared, where gamma is the domain identification margin. The two results unify the reliability sensitivity bands, the single-cell spike-in bias, the weak-supervision gold-set sample complexity, and the differential-privacy mechanism partition as one structured-coarsening sensitivity-and-restoration theory, and place the coarsening program in the lineage of missing-not-at-random sensitivity analysis, measurement-error double sampling, and verification-bias correction. It is the C2-violation companion to the coarsening-at-random synthesis.</p>",
+  "version": "v0.1.0",
+  "language": "eng",
+  "license": {"id": "CC-BY-4.0"},
+  "keywords": [
+    "coarsening at random",
+    "sensitivity analysis",
+    "partial identification",
+    "missing not at random",
+    "measurement error",
+    "verification bias",
+    "sample complexity",
+    "identifiability",
+    "maximum likelihood"
+  ],
+  "creators": [
+    {
+      "name": "Towell, Alexander",
+      "orcid": "0000-0001-6443-9897",
+      "affiliation": "Southern Illinois University Edwardsville"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.20533912",
+      "relation": "continues",
+      "scheme": "doi"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+%% Identifiability under imperfect coarsening:
+%% sensitivity bounds and the singleton sample complexity that restores them.
+%% Methods-format draft (target venue: Statistical Science / JASA / Biometrika).
+%%
+%% Pillar 2 of the coarsening-at-random program: the C2-violation companion to
+%% coarsening-synthesis (Pillar 1, the C2-holds unification). Formatted with the
+%% IMS imsart class (sts option); class files bundled in the repo root so the
+%% build is self-contained.
+
+\documentclass[sts]{imsart}
+
+%% ============================================================================
+%% Packages (follows the official STS template; mirrors coarsening-synthesis)
+%% ============================================================================
+\RequirePackage{amsthm,amsmath,amsfonts,amssymb}
+\RequirePackage[authoryear]{natbib}
+\RequirePackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+\RequirePackage{mathtools}
+\RequirePackage{bm}
+\RequirePackage{booktabs}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{microtype}
+\RequirePackage{cleveref}
+
+%% ============================================================================
+%% Local definitions (imsart requires these inside \startlocaldefs ... \endlocaldefs)
+%% ============================================================================
+\startlocaldefs
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{condition}{Condition}
+\crefname{condition}{Condition}{Conditions}
+\Crefname{condition}{Condition}{Conditions}
+
+\newtheorem{remark}{Remark}
+
+%% Macros (mirror coarsening-synthesis so notation matches across the two pillars)
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\X}{X}
+\newcommand{\Y}{Y}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\T}{T}
+\newcommand{\bias}{\mathrm{bias}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Info}{\mathcal{I}}
+
+\endlocaldefs
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Identifiability under imperfect coarsening: sensitivity bounds
+       and the singleton sample complexity that restores them}
+\runtitle{Identifiability under imperfect coarsening}
+
+\begin{aug}
+\author[A]{\fnms{Alexander}~\snm{Towell}\ead[label=e1]{lex@metafunctor.com}\orcid{0000-0001-6443-9897}}
+\runauthor{A. Towell}
+
+\address[A]{Department of Computer Science,
+Southern Illinois University Edwardsville,
+Edwardsville, Illinois, USA\printead[presep={\ }]{e1}.}
+\end{aug}
+
+\begin{abstract}
+Coarsening at random, the conditions C1, C2, C3, makes a latent parameter
+identifiable and the face-value maximum-likelihood fit consistent. But the
+symmetry condition C2, that the coarsening does not depend on which admissible
+latent value is the true one, is the exception rather than the rule: real
+coarsening is usually informative. This paper develops the theory for imperfect
+coarsening. We parametrize the violation of C2 by a tilt of magnitude $\delta$
+and prove a sensitivity bound: the asymptotic bias of the face-value MLE is, at
+leading order, linear in $\delta$ with an explicit constant set by the covariance
+of the face-value score with the tilt, so the latent parameter is partially
+identified over a $\delta$-ball that contracts to a point as C2 is approached. We
+then prove a restoration theorem with a sample-complexity rate: a singleton
+report, one that pins the latent value and is therefore a classical
+internal-validation observation, restores point identification, and the number of
+singletons needed to recover the $r$ confounded directions to a target accuracy is
+of order $r / \gamma^2$, where $\gamma$ is the domain's identification margin. The
+two results unify the reliability sensitivity bands, the single-cell spike-in
+bias, the weak-supervision gold-set sample complexity, and the differential-privacy
+mechanism partition as instances of one structured-coarsening
+sensitivity-and-restoration theory, and place the coarsening program in the
+lineage of missing-not-at-random sensitivity analysis, measurement-error double
+sampling, and verification-bias correction.
+\end{abstract}
+
+\begin{keyword}
+\kwd{coarsening at random}
+\kwd{sensitivity analysis}
+\kwd{partial identification}
+\kwd{missing not at random}
+\kwd{measurement error}
+\kwd{sample complexity}
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/introduction}
+\input{sections/framework}
+\input{sections/sensitivity}
+\input{sections/restoration}
+\input{sections/instances}
+\input{sections/validation}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{imsart-nameyear}
+\bibliography{refs}
+
+\end{document}

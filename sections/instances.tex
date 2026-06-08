@@ -1,0 +1,66 @@
+\section{The domains as instances}
+\label{sec:instances}
+
+The two theorems specialize to each field by naming three objects: the tilt $h$
+that C2 violation takes, the margin $\gamma$ that sets the singleton sample
+complexity, and the singleton itself. \Cref{tab:instances} collects them.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.17\linewidth} p{0.29\linewidth} p{0.23\linewidth} p{0.21\linewidth}@{}}
+\toprule
+\textbf{Domain} & \textbf{C2 violation (tilt $h$)} & \textbf{Margin $\gamma$} & \textbf{Singleton} \\
+\midrule
+Reliability \citep{towell2026mdrelax} &
+  Group-structured informative masking &
+  Masking-preference bound &
+  A resolving diagnostic \\
+scRNA-seq \citep{towell2026scrnacoarsening} &
+  Dropout increasing in true expression &
+  ERCC-vs-endogenous capture ratio &
+  ERCC spike-in \\
+Spatial \citep{towell2026spatialcoarsening} &
+  Capture efficiency varying by cell type &
+  Single-cell probe resolution &
+  Single-cell-resolution probe \\
+Differential privacy \citep{towell2026dpcoarsening} &
+  Data-dependent mechanism (SVT, PTR) &
+  Released kernel scale &
+  Non-private release \\
+Weak supervision \citep{towell2026weaksupcoarsening} &
+  Labeling-function dependence &
+  Accuracy gap &
+  Gold-labeled example \\
+Phenotyping \citep{towell2026phenotypecoarsening} &
+  Severity-correlated coding &
+  Case-mix gap &
+  Chart-reviewed patient \\
+\bottomrule
+\end{tabular}
+\caption{The C2-violation tilt, the identification margin, and the singleton in
+each domain. \Cref{thm:sensitivity} reads the bias bound $\delta B(\theta)$ in the
+tilt column; \cref{thm:restoration} reads the $r/\gamma^2$ rate in the margin
+column. Reliability is the worked instance \citep{towell2026mdrelax}; the others
+specialize the same two theorems.}
+\label{tab:instances}
+\end{table}
+
+Two domains need a word. Differential privacy sits in the location-family regime of
+\citet{towell2026synthesis}: its coarsening is engineered, so the tilt $h$ is not a
+modeling unknown but a property of the chosen mechanism, and the C2 partition is
+sharp, data-independent mechanisms (Laplace, Gaussian) have $\delta = 0$ by
+construction, while data-dependent mechanisms (sparse vector, propose-test-release)
+have $\delta > 0$ with $h$ determined by the realized query. The sensitivity bound
+is therefore exact and computable rather than worst-case there, and the non-private
+release is a singleton that both sets $\gamma$ and zeroes $\delta$. Weak supervision
+is the cleanest illustration of \cref{thm:restoration}: the rank deficit $r$ is the
+labeling-function dependence dimension and $\gamma$ is the accuracy gap, so the
+gold-set rate $\Theta(r/\mathrm{gap}^2)$ of \citet{towell2026weaksupcoarsening} is
+\eqref{eq:samplecomplexity} verbatim.
+
+Reliability is the fully worked instance and ships the software: the relaxed
+candidate-set tilt of \citet{towell2026mdrelax} is \cref{def:tilt} with a
+group-structured $h$, its first-order robustness interval is the bias bound
+\eqref{eq:Bdelta}, and its \texttt{ri\_first\_order} routine computes the identified
+interval of \cref{cor:partial} for a user-supplied $\delta$.

@@ -1,0 +1,50 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Two lineages the coarsening program now joins.} The sensitivity bound is
+a structured instance of missing-not-at-random sensitivity analysis. The tilt
+$\delta$ of \cref{def:tilt} is the coarsened-data counterpart of the selection tilt
+of \citet{copas1997inference}, the identified set of \cref{cor:partial} is a Manski
+bound \citep{manski1989anatomy}, and the impossibility of testing $\delta$ from the
+observed data is the coarsened-data form of the equal-fit phenomenon of
+\citet{molenberghs2008every}: two tilts with the same face-value fit and different
+latent conclusions cannot be told apart without external information. What the
+coarsening view adds to that literature is structure, the candidate set and the
+coarsening-sufficient statistic, which turn an abstract sensitivity parameter into a
+computable bias direction $\Info^{-1}\Cov(s, h)$ and an explicit constant
+$B(\theta)$. The restoration theorem is the corresponding instance of
+measurement-error double sampling and verification-bias correction
+\citep{tenenbein1970double,begg1983assessment,carroll2006measurement}: the singleton
+is internal validation, and \cref{thm:restoration} is its sample-complexity
+accounting, with the margin $\gamma$ the analogue of validation-sample
+informativeness.
+
+\paragraph{Why C2 deserved this.} A coarsening-literate reader objects that C1, C2,
+C3 are untestable and fragile \citep{grunwald2003updating,jaeger2005ignorability},
+and that assuming them is the weak point of the program. This paper is the response:
+it does not assume C2, it measures the cost of its failure and prices the cure. The
+honest deliverable under informative coarsening is the identified set of
+\cref{cor:partial} together with the singleton budget of \cref{thm:restoration},
+not a point estimate presented as if C2 held.
+
+\paragraph{Relation to the synthesis and to known identities.} With
+\citet{towell2026synthesis} this completes a two-pillar account: that paper gives
+the C2-holds identity, identifiability, and singleton cure; this one gives the
+C2-fails bias bound, partial identification, and singleton sample complexity. The
+exponential-family regularity that makes \cref{thm:sensitivity} exact along curved
+directions is the coarsened-data moment-matching of \citet{domke2020moment} read
+under a tilt; the rank deficit $r$ is the finite-support completeness gap of
+\citet{neweypowell2003instrumental} and the single-view specialization of the
+proxy-identification logic of \citet{miao2018identifying}; the singleton is the
+substitute for the multiple conditionally independent views that the latent-variable
+canon assumes and the coarsened-data setting lacks.
+
+\paragraph{Limitations.} The bias bound is first order in $\delta$; the
+exponential-family exactness covers the curved directions but the general
+finite-$\delta$, finite-$n$ remainder is bounded, not characterized, and tightening
+it (especially in the location-family regime) is open. The sample-complexity rate is
+stated for a balanced singleton allocation over the confounded subspace; optimal
+allocation when the margins differ across directions, and adaptive singleton
+acquisition, are natural extensions. Estimating the rank deficit $r$ and the margin
+$\gamma$ from data, rather than treating them as known, is the same open problem the
+weak-supervision sibling records.
