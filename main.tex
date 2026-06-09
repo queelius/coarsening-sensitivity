@@ -5,15 +5,18 @@
 %%
 %% Pillar 2 of the coarsening-at-random program: the C2-violation companion to
 %% coarsening-synthesis (Pillar 1, the C2-holds unification). Formatted with the
-%% IMS imsart class (ejs option); class files bundled in the repo root so the
-%% build is self-contained.
+%% IMS imsart class (ejsv2 option), the official VTeX EJS package vendored in the
+%% repo root so the build is self-contained.
 
-\documentclass[ejs]{imsart}
+\documentclass[ejsv2]{imsart}
 
 %% ============================================================================
 %% Packages (follows the official STS template; mirrors coarsening-synthesis)
 %% ============================================================================
-\RequirePackage{amsthm,amsmath,amsfonts,amssymb}
+%% Note: the imsart ejsv2 class already loads amsthm, amsmath, amssymb, amsfonts,
+%% mathrsfs (and newtxmath). We do not reload amssymb/amsfonts: doing so re-triggers
+%% the newtxmath \Bbbk clash the class guards against internally.
+\RequirePackage{amsthm,amsmath}
 \RequirePackage[authoryear]{natbib}
 \RequirePackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
 \RequirePackage{graphicx}
