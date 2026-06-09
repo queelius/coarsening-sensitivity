@@ -8,9 +8,20 @@ authors:
     orcid: "0000-0001-6443-9897"
     affiliation: "Department of Computer Science, Southern Illinois University Edwardsville"
 paper_type: theory-methods
-stage: scaffold-v0.1
+stage: submitted (EJS, 2026-06-09)
 created: 2026-06-08
-last_updated: 2026-06-08
+last_updated: 2026-06-09
+
+submission:
+  venue: "Electronic Journal of Statistics (EJS)"
+  manuscript_id: "EJS2606-023"
+  status: under-review
+  submitted: 2026-06-09
+  round: null      # not yet assigned (initial editorial processing)
+  decision: null
+  track_url: "https://www.e-publications.org/ims/submission/EJS/author/track/2"
+  uploaded: "main.pdf (ejsv2,noshowframe build, md5 e48caf23) + LaTeX source zip; metadata, MSC2020, keywords, cover letter, suggested referees all entered"
+  action_pending: "PUBLISH the Zenodo preprint draft 20604315 so the cover-letter-disclosed concept DOI 10.5281/zenodo.20604314 actually resolves (currently still an unsubmitted draft)."
 
 structure:
   format: LaTeX-imsart-sts
