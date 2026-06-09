@@ -29,14 +29,15 @@ receives a positive share of the singleton budget). To restore each of the $r$
 confounded directions to expected squared error at most $\eps^2$, the number of
 singletons needed is
 \begin{equation}
-  n_{\mathrm{s}} \;=\; \Theta\!\left( \frac{r\, \sigma^2}{\eps^2\, \gamma^2} \right),
+  n_{\mathrm{s}} \;\asymp\; \frac{r\, \sigma^2}{\eps^2\, \gamma^2},
   \qquad\text{equivalently}\qquad
   n_{\mathrm{s}} \;=\; \Theta\!\left( \frac{r}{\gamma^2} \right)
   \label{eq:samplecomplexity}
 \end{equation}
-at a fixed target accuracy and noise level. The bound is tight: a matching lower
-bound holds by a two-point (Le Cam) argument along the least-identified direction
-of $V$.
+at a fixed target accuracy $\eps$ and noise level $\sigma^2$; the first form carries
+the constants explicitly, the second holds them fixed so the asymptotic order is in
+$r$ and $\gamma$ alone. The bound is tight: a matching lower bound holds by a
+two-point (Le Cam) argument along the least-identified direction of $V$.
 \end{theorem}
 
 \begin{proof}[Sketch]
@@ -47,8 +48,8 @@ Fisher information of order $\gamma^2/\sigma^2$ for any unit direction. Under a
 balanced allocation, $n_{\mathrm{s}}/r$ singletons per direction give per-direction
 squared error of order $\sigma^2 /(\gamma^2\, n_{\mathrm{s}}/r) =
 r\sigma^2/(\gamma^2 n_{\mathrm{s}})$. Holding each confounded direction to $\eps^2$
-gives $n_{\mathrm{s}} = \Theta(r\sigma^2/(\eps^2\gamma^2))$, which is
-\eqref{eq:samplecomplexity}; holding the \emph{total} squared error to $\eps^2$
+gives $n_{\mathrm{s}} \asymp r\sigma^2/(\eps^2\gamma^2) = \Theta(r/\gamma^2)$, which
+is \eqref{eq:samplecomplexity}; holding the \emph{total} squared error to $\eps^2$
 instead gives $\Theta(r^2/\gamma^2)$, and the per-direction reading is the one the
 singleton-budget interpretation intends. Lower bound. Take two parameter values
 differing only along the least-identified unit direction $v^\star \in V$ by a gap

@@ -17,8 +17,10 @@ $\mathrm{C2}(\delta)$ for a grid of $\delta$, fit the face-value MLE, and record
 realized parameter bias against the first-order prediction $\delta\,
 \Info^{-1}\Cov(s, h)$ of \eqref{eq:bias}. The prediction is confirmed if the
 realized bias is linear in $\delta$ through the origin with slope matching the
-analytic constant, and if the realized identified set matches the ellipsoid of
-\cref{cor:partial}. The exponential-family domains (single-cell, spatial,
+analytic constant; this slope is the worst-case edge of the zonotope
+$\mathcal{S}_\delta$ of \cref{cor:partial} along the tested tilt, so the scalar check
+verifies the bound $\delta B(\theta^\star)$ that bounds that set without simulating
+its full geometry. The exponential-family domains (single-cell, spatial,
 phenotyping, the discrete weak-supervision parametrization) should track the
 prediction with no $O(\delta^2)$ curvature along the curved directions; the
 location-family domain (differential privacy) should track it up to the
@@ -39,7 +41,10 @@ with value-dependent coarsening: each unit is either reported exactly (an
 informative singleton) or coarsened to an uninformative full candidate set, with
 the keep-weight tilted by the true value, $\kappa(\text{keep}\mid y) =
 \kappa_0\exp\{\delta(y-p^\star)\}$, the textbook value-dependent-missingness form
-of \cref{def:tilt}. The location-family regime is the differential-privacy
+of \cref{def:tilt}. Concretely this is \cref{def:tilt} with the coarsen report's
+candidate set $\{0, 1\}$ and within-set tilt $h(r, y) = y - p^\star$, whose
+variation across that set (slope $\delta$) is the C2 violation. The location-family
+regime is the differential-privacy
 mechanism $M = \mu + Z$ with a data-dependent Gaussian tilt of scale set by
 $\sigma^2/c$. The predictions hold exactly where the theory says they should.
 On the natural scale the exponential-family bias is exactly $\delta$ at every

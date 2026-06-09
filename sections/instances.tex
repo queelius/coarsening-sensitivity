@@ -146,7 +146,12 @@ data-independent mechanism (Laplace, Gaussian) has $\delta = 0$ by construction,
 while a data-dependent mechanism (sparse vector, propose-test-release) has $\delta >
 0$ with $h$ fixed by the realized query path. \Cref{thm:sensitivity} is therefore
 exact and computable here, not a worst-case envelope: the bias direction
-$\Info^{-1}\Cov(s,h)$ is read off the known mechanism. For \cref{thm:restoration} the
+$\Info^{-1}\Cov(s,h)$ is read off the known mechanism. The engineered location-family
+tilt $h(m) = (m - \mu)/c$ is unbounded in $m$, so the $\|h\|_\infty \le 1$
+normalization of \cref{def:tilt} is taken on the effective support; the bias identity
+\eqref{eq:bias} needs only a finite score-tilt covariance and applies regardless,
+while the supremum bound \eqref{eq:Bdelta} is the statement for the bounded-tilt
+regime. For \cref{thm:restoration} the
 deficient subspace is the one the composed Fisher informations fail to span jointly
 (the span condition of its \texttt{thm:composition}, $r$ directions left unidentified
 by an adaptive composition such as SVT), and the margin $\gamma$ is the released

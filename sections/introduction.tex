@@ -52,10 +52,11 @@ classical internal validation; the C2 tilt is a structured sensitivity parameter
   $\delta$ with an explicit constant: the inverse face-value information times the
   covariance of the face-value score with the tilt. The latent parameter is
   partially identified over a $\delta$-ball that contracts to a point as
-  $\delta \to 0$. In a regular exponential family the leading term is exact at
-  every $\delta$ along curved directions; the marginal-fit check that
-  \citet{towell2026synthesis} shows is blind to bias under C2 is exactly the
-  quantity the bound controls.
+  $\delta \to 0$. In a regular exponential family, when the tilt is linear in the
+  natural statistic, the leading term is exact at every $\delta$ along the curved
+  directions (the range of $\partial \eta / \partial \theta$, the model's tangent
+  space); the marginal-fit check that \citet{towell2026synthesis} shows is blind to
+  bias under C2 is exactly the quantity the bound controls.
 \item \textbf{A singleton sample-complexity theorem}
   (\cref{thm:restoration}, \cref{sec:restoration}). When the augmented
   candidate-set matrix has rank deficit $r$, a set of singletons spanning the
@@ -66,8 +67,8 @@ classical internal validation; the C2 tilt is a structured sensitivity parameter
   \citet{towell2026scrnacoarsening} as one rate with a domain-specific margin.
 \item \textbf{Six domain instances} (\cref{sec:instances}) and a cross-domain
   simulation (\cref{sec:validation}) showing the bias bound is tight and the
-  $r/\gamma^2$ rate holds across reliability, single-cell and spatial genomics,
-  differential privacy, weak supervision, and phenotyping.
+  $r/\gamma^2$ rate holds on representative exponential-family and location-family
+  instances.
 \end{enumerate}
 
 Together with \citet{towell2026synthesis}, which handles the C2-holds case, this is

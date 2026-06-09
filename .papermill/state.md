@@ -70,7 +70,26 @@ venue:
 # ============================================================================
 # REVIEW HISTORY (papermill:review)
 # ============================================================================
-review_history: []
+review_history:
+  - date: 2026-06-08
+    reviewer: papermill multi-agent (area chair direct; Task sub-agents unavailable)
+    recommendation: minor-revision
+    dir: .papermill/reviews/2026-06-08/
+    verdict: >
+      Both theorems correct; build clean; simulation reproduces every reported number.
+      The four prior proof flags (C1, M1, M2, M3) all HOLD as fixed in the appendix.
+      Residual work is main-text sync with the corrected appendix, not new mathematics.
+    fix_status: {C1: holds, M1: holds-in-appendix, M2: holds, M3: holds}
+    counts: {critical: 0, major: 3, minor: 9, suggestions: 5}
+    major_findings:
+      - "cor:partial + validation call the identified set an 'ellipsoid'; it is a zonotope (image of an L-infinity ball). sensitivity.tex:65, validation.tex:20."
+      - "thm:sensitivity proof sketch (sensitivity.tex:55-56) still states the L2/Cauchy-Schwarz characterization that the M1 appendix fix replaced with the L-infinity sign extreme point."
+      - 'Notation collision: \Info=\mathcal{I} (Fisher information) vs \mathcal{I}_delta (identified set) in the same corollary.'
+    top_minor:
+      - "Add tower-property note so Cov(s,h)=Cov(s,hbar) is visible in the main text (hbar appears only in the appendix)."
+      - "Add the 'h linear in T' qualifier to the main-text exp-family exactness claims (intro:55, sensitivity:82)."
+      - "eq:samplecomplexity Theta(.) retains sigma^2/eps^2; drop them from Theta or unwrap the constant-carrying form."
+      - "Fix the garbled sentence inside app:restoration (appendix.tex:119-122)."
 
 # ============================================================================
 # LOG
@@ -79,3 +98,8 @@ review_history: []
 #   Theorems A and B stated with proof sketches; refs seeded with the sibling
 #   concept DOIs and the MNAR/measurement-error/completeness lineage. Build clean
 #   (6 pages at scaffold). Cross-domain delta-sweep harness in progress.
+# 2026-06-08: Multi-agent pre-submission review (reviews/2026-06-08/). Verdict
+#   minor-revision. Re-verified the C1/M1/M2/M3 appendix fixes (all hold).
+#   Build clean (0 undefined non-Font); make sim reproduces all reported
+#   numbers; figures render. 3 major (ellipsoid->zonotope; sketch vs appendix
+#   on M1; I/I_delta notation clash) + 9 minor. Now 9 pages.

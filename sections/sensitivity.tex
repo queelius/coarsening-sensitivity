@@ -24,8 +24,11 @@ pseudo-true parameter satisfies, as $\delta \to 0$,
   \;+\; O(\delta^2),
   \label{eq:bias}
 \end{equation}
-where the covariance is taken over the joint law of $(Y, R)$ at $\delta = 0$. In
-particular the asymptotic bias is bounded by
+where the covariance is taken over the joint law of $(Y, R)$ at $\delta = 0$. Because
+$s$ is a function of $R$ alone, the tower property gives $\Cov(s, h(R,Y)) = \Cov(s,
+\bar h)$ with $\bar h(R) = \E[h(R,Y) \mid R]$ the candidate-set-conditional tilt, so
+the tilt enters the bias only through its candidate-set-conditional mean (the form
+the appendix uses). In particular the asymptotic bias is bounded by
 \begin{equation}
   \|\theta_\delta - \theta^\star\|
   \;\le\; \delta\, B(\theta^\star) + O(\delta^2),
@@ -35,8 +38,9 @@ particular the asymptotic bias is bounded by
        \big\|\Cov_{\theta^\star}(s, h)\big\|,
   \label{eq:Bdelta}
 \end{equation}
-with $B(\theta^\star) < \infty$ and $B$ independent of $\delta$. The bound is
-attained by the worst-case tilt aligned with the score.
+with $B(\theta^\star) < \infty$ and $B$ independent of $\delta$. The supremum is
+attained at the worst-case tilt, the $L^\infty$ sign extreme point of the
+candidate-set-conditional score component.
 \end{theorem}
 
 \begin{proof}[Sketch]
@@ -50,27 +54,35 @@ negative information, $\partial_\theta \Psi(\theta^\star, 0) = -\Info(\theta^\st
 differentiate the tilted report law $p_\delta(r \mid \theta) \propto \int_{c(r)}
 g(y \mid \theta)\, \kappa_0(r) e^{\delta h(r,y)}\, d\nu(y)$: $\partial_\delta \log
 p_\delta|_0$ is the within-candidate-set centered tilt, so $\partial_\delta
-\Psi(\theta^\star, 0) = \E_{\theta^\star}[\, s(R; \theta^\star)\, h(R, Y)\,] =
-\Cov_{\theta^\star}(s, h)$ using $\E[s] = 0$ at $\delta = 0$. Combining yields
-\eqref{eq:bias}; the bound \eqref{eq:Bdelta} is Cauchy--Schwarz over $\|h\|_\infty
-\le 1$, attained at $h \propto$ the conditional projection of $s$ onto
-within-candidate-set variation. Full regularity (uniform integrability of the
+\Psi(\theta^\star, 0) = \E_{\theta^\star}[\, s(R; \theta^\star)\, \bar h(R)\,] =
+\Cov_{\theta^\star}(s, \bar h)$, where $\bar h(r) = \E[h(R,Y) \mid R = r]$ is the
+candidate-set-conditional tilt and we use $\E[s] = 0$ at $\delta = 0$. Combining
+yields \eqref{eq:bias}; the bound \eqref{eq:Bdelta} is the supremum of
+$\|\Cov(s, h)\|$ over $\|h\|_\infty \le 1$, attained at the $L^\infty$ sign extreme
+point $\bar h = \operatorname{sign}$ of the candidate-set-conditional score
+component, with the Cauchy--Schwarz step giving only a looser closed-form envelope
+(deferred to \cref{app:sensitivity}). Full regularity (uniform integrability of the
 remainder, a dominating envelope for the family $\{p_\delta\}$) is standard
-$M$-estimation and is deferred to \cref{app:sensitivity}.
+$M$-estimation and is also deferred to \cref{app:sensitivity}.
 \end{proof}
 
 \begin{corollary}[Partial identification]
 \label{cor:partial}
 Under \cref{thm:sensitivity}, the identified set for $\theta^\star$ given the
-coarsened data and a tilt budget $\delta$ is, to first order, the ellipsoid
+coarsened data and a tilt budget $\delta$ is, to first order, the zonotope
 \begin{equation}
-  \mathcal{I}_\delta
+  \mathcal{S}_\delta
   \;=\; \Big\{\, \hat\theta - \delta\, \Info^{-1}\Cov(s, h)
         \;:\; \|h\|_\infty \le 1 \,\Big\} + o(\delta),
+  \label{eq:identset}
 \end{equation}
-centered at the face-value estimate, with radius $\delta B(\theta^\star)$. It
-contracts to the point $\{\theta^\star\}$ as $\delta \to 0$, recovering the
-point identification of \citet{towell2026synthesis} under C2.
+the image of the $L^\infty$ tilt ball under the linear map $h \mapsto -\delta\,
+\Info^{-1}\Cov(s, h)$, a centrally symmetric set centered at the face-value estimate
+and contained in the ball of radius $\delta B(\theta^\star)$. (It is a zonotope, not
+an ellipsoid: an ellipsoid would arise from an $L^2$ tilt constraint, whereas
+\cref{def:tilt} bounds $h$ in $L^\infty$.) The set $\mathcal{S}_\delta$ contracts to
+the point $\{\theta^\star\}$ as $\delta \to 0$, recovering the point identification
+of \citet{towell2026synthesis} under C2.
 \end{corollary}
 
 \begin{remark}[What the marginal-fit check cannot see]
@@ -79,10 +91,12 @@ empirical mean, so a marginal-fit check is structurally blind to bias in the lat
 parameter. \Cref{thm:sensitivity} quantifies the blind spot: the bias direction
 $\Info^{-1}\Cov(s, h)$ is exactly the component of parameter error that leaves the
 fitted marginal of $\T$ unchanged, so a larger marginal fit is never reassurance
-against it. In a regular exponential family the leading term is exact along the
-curved directions at every $\delta$ (the report law stays an exponential family
-under the tilt, only with a $\delta$-shifted natural parameter), so
-\eqref{eq:bias} is not merely a small-$\delta$ approximation there; the
+against it. In a regular exponential family with natural statistic $\T$, when the
+tilt is linear in $\T$ (that is $h = a^\top \T$) the leading term is exact along the
+curved directions (the range of $\partial \eta / \partial \theta$) at every $\delta$,
+because the report law stays an exponential family under the tilt, only with a
+$\delta$-shifted natural parameter $\eta(\theta) + \delta a$; so \eqref{eq:bias} is
+not merely a small-$\delta$ approximation there (see \cref{app:sensitivity}). The
 location-family regime of \citet{towell2026synthesis} carries the usual
 $O_p(n^{-1/2})$ remainder on top.
 \end{remark}
