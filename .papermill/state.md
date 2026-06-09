@@ -64,8 +64,75 @@ contributions:
   - "Six domain instances (tab:instances) and a cross-domain delta-sweep validation."
 
 venue:
-  primary: "Statistical Science"
-  shortlist: ["Statistical Science", "JASA Theory and Methods", "Biometrika", "JRSS-B"]
+  # Venue analysis 2026-06-09 (web-verified; supersedes the scaffold's Statistical Science
+  # primary). Pillar 2 is a THEORY-METHODS paper with new theorems, NOT a synthesis.
+  # Statistical Science rejects plain theory-and-methods unless review-framed, and it is the
+  # companion synthesis's target, so the two pillars are deliberately split by genre:
+  # synthesis -> Statistical Science; sensitivity -> a theory-and-methods journal (below).
+  primary: "JASA Theory & Methods"
+  calibrated_co_primary: "Electronic Journal of Statistics (EJS)"
+  decision: "speed/certainty (EJS-first) vs imprint (JASA top-down) -- author's call; see strategy"
+  analyzed: 2026-06-09
+  shortlist:
+    - rank: 1
+      name: "JASA Theory & Methods"
+      fit: high
+      reformat_from_imsart: "yes (one-time class swap)"
+      note: >
+        Scope-perfect: missing-data/identification methods with required real-problem
+        motivation; the six instances + simulation harness satisfy JASA's motivation and
+        (mandatory-on-revision) reproducibility expectations. Most prestigious fit. Risks:
+        ~10% acceptance, slow review. Preprints permitted (disclose the Zenodo DOI).
+    - rank: 2
+      name: "Electronic Journal of Statistics (EJS)"
+      fit: high
+      reformat_from_imsart: "NO (imsart)"
+      note: >
+        Calibrated/fast: IMS, full open access, NO APC, zero reformat, historically <~3mo to
+        first decision, no page friction for ~10pp. Lower prestige than JASA but near-certain
+        fit and the fastest path, so the synthesis can cite a PUBLISHED methods paper.
+    - rank: 3
+      name: "Biometrika"
+      fit: good
+      reformat_from_imsart: "yes (OUP template)"
+      note: >
+        Partial-ID/sensitivity theory + verification-bias lineage fit the house style; compact
+        dense theory (~10pp on-brand). Reviewers will demand the first-order finite-delta
+        remainder be quantified, not just bounded.
+    - rank: 4
+      name: "Bernoulli"
+      fit: good
+      reformat_from_imsart: "NO (imsart bj template)"
+      note: >
+        IMS/Bernoulli-Society trade-up above EJS with zero reformat; more probability-leaning,
+        so lead with the theorems (bias bound, identified set, minimax rate) over the six
+        applied instances. Slower and more selective than EJS.
+    - rank: 5
+      name: "JRSS Series B"
+      fit: weak
+      reformat_from_imsart: "yes (OUP class)"
+      note: >
+        Elite methodology; wants broad-impact methodology rather than a focused theorem-pair,
+        and may see the synthesis as already owning the broad frame. Reach unless reframed.
+  reach: >
+    Annals of Statistics (imsart, no reformat) ONLY if reframed around the minimax lower bound
+    and the theory is deepened (full risk characterization over the zonotope); as-is a likely
+    desk-reject for being too short/applied.
+  excluded:
+    - "Statistical Science as primary: rejects plain theory-and-methods; it is the synthesis's venue. Keep the pillars separate."
+    - "Biometrics: biom.cls reformat, 25pp cap, biological-sciences identity; scope mismatch."
+    - "Journal of Econometrics / Quantitative Economics: no economic application despite the partial-ID content."
+  strategy: >
+    The decision is speed/certainty vs imprint. Calibrated-first (EJS) banks a fast,
+    near-certain, zero-overhead OA publication so the synthesis can cite a published methods
+    paper; top-down (JASA T&M, fall back to Bernoulli or EJS) trades months for the JASA
+    imprint. No venue penalizes prior rejection, so serial submission costs only time; the
+    real friction is repeated non-imsart reformatting (JASA -> Biometrika -> JRSS-B each need a
+    different class), which an IMS-family choice (EJS/Bernoulli) avoids. Content lever for the
+    higher-bar venues: tighten and quantify the first-order finite-delta remainder, the single
+    most likely technical objection. Keep the division of labor explicit in the cover letter
+    (this = the C2-violation theorems; synthesis = the cross-domain review frame) so neither
+    reads as salami-slicing.
 
 # ============================================================================
 # REVIEW HISTORY (papermill:review)
