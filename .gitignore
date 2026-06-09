@@ -26,3 +26,6 @@ main.pdf
 *.swp
 *~
 .DS_Store
+
+# Submission working materials (cover letter, suggested referees); kept local
+submission/
