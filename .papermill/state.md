@@ -21,7 +21,7 @@ submission:
   decision: null
   track_url: "https://www.e-publications.org/ims/submission/EJS/author/track/2"
   uploaded: "main.pdf (ejsv2,noshowframe build, md5 e48caf23) + LaTeX source zip; metadata, MSC2020, keywords, cover letter, suggested referees all entered"
-  action_pending: "PUBLISH the Zenodo preprint draft 20604315 so the cover-letter-disclosed concept DOI 10.5281/zenodo.20604314 actually resolves (currently still an unsubmitted draft)."
+  preprint: "PUBLISHED 2026-06-09: Zenodo version DOI 10.5281/zenodo.20604315; concept DOI 10.5281/zenodo.20604314 now resolves (record https://zenodo.org/records/20604315)."
 
 structure:
   format: LaTeX-imsart-sts
