@@ -18,7 +18,8 @@ Let $\gamma$ be the \emph{identification margin}: the smallest signal a singleto
 contributes along $V$ (the labeling-function accuracy gap in weak supervision, the
 spike-in capture ratio in single-cell data), so that a singleton carries
 per-direction Fisher information of order $\gamma^2/\sigma^2$ for $v^\top \theta$,
-and let $\sigma^2$ bound the per-singleton influence-function variance.
+and let $\sigma^2$ be the per-singleton observation-noise variance (the influence
+function for a confounded direction then has variance $\sigma^2/\gamma^2$).
 
 \begin{theorem}[Singleton sample complexity]
 \label{thm:restoration}

@@ -36,8 +36,7 @@ bounded log-linear tilt.
 \label{def:tilt}
 For $\delta \ge 0$, the coarsening satisfies $\mathrm{C2}(\delta)$ if for every
 report $r$ there is a bounded function $h(r, \cdot) : c(r) \to \R$ with
-$\sup_{y \in c(r)} |h(r,y)| \le 1$ and within-set mean zero under the fitted
-weighting, such that
+$\sup_{y \in c(r)} |h(r,y)| \le 1$, such that
 \begin{equation}
   \kappa(r \mid y) \;=\; \kappa_0(r)\, \exp\{\delta\, h(r, y)\},
   \qquad y \in c(r),
@@ -50,8 +49,10 @@ scaled by $\delta$), and retain C1 and C3 throughout.
 
 At $\delta = 0$, \eqref{eq:tilt} is C2 and the face-value MLE is consistent. For
 $\delta > 0$ the weight is informative: the report carries a $\theta$-correlated
-preference for some admissible latent values over others, and the factorization
-that licenses \eqref{eq:facevalue} no longer holds exactly. The magnitude $\delta$
+preference for some admissible latent values over others (only the variation of
+$h$ across $c(r)$ is informative; a within-set-constant tilt is absorbed into
+$\kappa_0$ and preserves C2), and the factorization that licenses
+\eqref{eq:facevalue} no longer holds exactly. The magnitude $\delta$
 is a sensitivity parameter in the sense of \citet{copas1997inference} and
 \citet{manski1989anatomy}: it is not estimable from the coarsened data alone (C2 is
 untestable), so the honest output is an identified set indexed by $\delta$ together
