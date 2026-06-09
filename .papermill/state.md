@@ -69,9 +69,14 @@ venue:
   # Statistical Science rejects plain theory-and-methods unless review-framed, and it is the
   # companion synthesis's target, so the two pillars are deliberately split by genre:
   # synthesis -> Statistical Science; sensitivity -> a theory-and-methods journal (below).
-  primary: "JASA Theory & Methods"
-  calibrated_co_primary: "Electronic Journal of Statistics (EJS)"
-  decision: "speed/certainty (EJS-first) vs imprint (JASA top-down) -- author's call; see strategy"
+  primary: "Electronic Journal of Statistics (EJS)"
+  top_down_alternative: "JASA Theory & Methods"
+  decision: >
+    RESOLVED 2026-06-09 (author): EJS-first. Fast, zero-reformat (imsart ejs option), open
+    access with no APC, near-certain fit; banks a published methods paper the synthesis can
+    cite by concept DOI. JASA Theory & Methods kept as the top-down alternative if EJS declines
+    or a higher imprint is wanted. main.tex switched to documentclass[ejs]; the official
+    imsart-ejs.cnf (a benign optional production hook) can be vendored at submission.
   analyzed: 2026-06-09
   shortlist:
     - rank: 1
