@@ -64,3 +64,127 @@ candidate-set tilt of \citet{towell2026mdrelax} is \cref{def:tilt} with a
 group-structured $h$, its first-order robustness interval is the bias bound
 \eqref{eq:Bdelta}, and its \texttt{ri\_first\_order} routine computes the identified
 interval of \cref{cor:partial} for a user-supplied $\delta$.
+
+The six subsections below specialize \cref{thm:sensitivity,thm:restoration} one
+domain at a time, naming the tilt, the named bias bound the sibling already proves,
+the rank deficit and margin, and the singleton. None re-derive a result: each reuses
+the sibling's own constant.
+
+\subsection{Reliability: masked component causes}
+\label{sec:inst-reliability}
+
+The latent $\Y$ is the failed component of a series system and the report is a
+candidate set of components that could have caused the failure
+\citep{towell2026masked}. C2 is non-informative masking: which admissible component
+is named does not depend on which one actually failed. The tilt $h$ of
+\cref{def:tilt} is a group-structured masking preference, realized in
+\citet{towell2026mdrelax} as a perturbed masking-probability matrix $P(\delta) = P_0
++ \delta\, D$ with direction $D$, so $h(r,y)$ is the within-candidate-set log-weight
+that favors some components over others. The sensitivity bound \eqref{eq:Bdelta}
+specializes to that paper's \emph{first-order robustness interval}: its index of
+local sensitivity to nonignorability (the slope of the estimand's deviation in
+$\delta$ at $\delta = 0$) is the per-direction reading of $\Info^{-1}\Cov(s,h)$, and
+its \texttt{ri\_first\_order} routine returns $\mathrm{tolerance}/|\mathrm{ISNI}|$,
+the largest $\delta$ keeping the estimand inside a stated tolerance, which is exactly
+the $\delta B(\theta^\star)$ radius of \cref{cor:partial} solved for $\delta$. For
+\cref{thm:restoration} the rank deficit $r$ is the dimension of the confounded
+subspace of the augmented candidate-set matrix of \citet{towell2026masked} (its
+rank-deficiency witness has a one-dimensional null space along the
+$(1,-1,-1,1)$ direction), and the margin $\gamma$ is the masking-preference signal a
+resolving observation contributes along that subspace. The singleton is a resolving
+diagnostic that names a single component, the identity-row that lifts the augmented
+rank.
+
+\subsection{Single-cell RNA sequencing: dropout}
+\label{sec:inst-scrna}
+
+The latent $\Y$ is a cell's true transcript count and the report is the observed
+(zero-inflated) count \citep{towell2026scrnacoarsening}. C2 fails when the dropout
+probability depends on the true expression level, so the tilt $h$ is dropout
+increasing in $\Y$, parametrized there by a logit-intercept shift $s$ between the
+spike-in and endogenous dropout curves; $s$ is our $\delta$. The sensitivity bound
+\eqref{eq:Bdelta} is that paper's spike-in oracle bias bound (its
+\texttt{thm:bias-bound}): the per-gene bias is $J_{\mu\phi}\,\Delta\phi + O(s^2)$
+with $J_{\mu\phi} = -I_{\mu\mu}^{-1} I_{\mu\phi}$, which is precisely
+$\Info^{-1}\Cov(s,h)$ written in the gene-level information blocks, and its
+``useful zone'' $|s| \lesssim 0.5$ is the interval on which $\delta B(\theta^\star)$
+stays below the naive-estimator error. Here the confounded subspace is
+one-dimensional ($r = 1$, the dropout-shape direction the coarsened counts cannot
+separate from the mean), and the margin $\gamma$ is the ERCC-versus-endogenous
+capture ratio, the signal a spike-in carries about that direction. The singleton is
+the ERCC spike-in, a transcript whose true count is known by construction; the
+$r = 1$, finite-singleton case of \cref{thm:restoration} is the spike-in-fit bias
+\citet{towell2026scrnacoarsening} reports.
+
+\subsection{Spatial transcriptomics: cell-type deconvolution}
+\label{sec:inst-spatial}
+
+The latent $\Y$ is the cell-type composition of a spot and the report is the spot's
+pooled expression \citep{towell2026spatialcoarsening}. C2 fails when capture
+efficiency varies by cell type, so the tilt $h$ reweights the within-spot
+contribution toward some types; the bias bound \eqref{eq:Bdelta} is that paper's
+\emph{marker-gene bias bound} (its \texttt{thm:bias-marker}), in which the bias is
+controlled by the conditioning of the marker matrix $M$, and which recovers
+Tangram's empirical ``a few hundred marker genes suffice'' rule as the regime where
+$\delta B(\theta^\star)$ is small. For \cref{thm:restoration} the rank deficit $r$
+is the column-rank deficit of the spot-by-cell-type composition matrix $P$ (the
+full-column-rank condition of its \texttt{thm:rank} is the coarsening-rank condition
+of \citet{towell2026synthesis}, so $r = K - \operatorname{rank} P$ confounded
+type directions), and the margin $\gamma$ is the resolution of a single-cell probe
+along a deficient type. The singleton is a single-cell-resolution probe
+(MERFISH / seqFISH+): a spot known to contain one cell type, the standard-basis row
+that restores column rank.
+
+\subsection{Differential privacy: data-dependent mechanisms}
+\label{sec:inst-dp}
+
+The latent $\Y$ is a confidential statistic and the report is its privatized release
+\citep{towell2026dpcoarsening}. This domain sits in the location-family regime of
+\citet{towell2026synthesis}, and the coarsening is engineered rather than observed,
+so the tilt $h$ is not a modeling unknown but a property of the chosen mechanism: a
+data-independent mechanism (Laplace, Gaussian) has $\delta = 0$ by construction,
+while a data-dependent mechanism (sparse vector, propose-test-release) has $\delta >
+0$ with $h$ fixed by the realized query path. \Cref{thm:sensitivity} is therefore
+exact and computable here, not a worst-case envelope: the bias direction
+$\Info^{-1}\Cov(s,h)$ is read off the known mechanism. For \cref{thm:restoration} the
+deficient subspace is the one the composed Fisher informations fail to span jointly
+(the span condition of its \texttt{thm:composition}, $r$ directions left unidentified
+by an adaptive composition such as SVT), and the margin $\gamma$ is the released
+kernel scale. The singleton is a non-private release of the statistic, which both
+sets $\gamma$ and zeroes $\delta$ for the released coordinate.
+
+\subsection{Weak supervision: labeling-function dependence}
+\label{sec:inst-weaksup}
+
+The latent $\Y$ is the true label and the report is the vector of labeling-function
+(LF) votes \citep{towell2026weaksupcoarsening}. C2 fails when LFs are correlated
+given the label, so the tilt $h$ is the LF-dependence structure. This is the
+cleanest instance of \cref{thm:restoration}: the rank deficit $r$ is the
+LF-dependence dimension, the margin $\gamma$ is the LF accuracy gap, and the
+gold-set sample complexity $\Theta(r/\mathrm{gap}^2)$ proved as that paper's $T4$
+(for total $L_2$ label-model recovery) is \eqref{eq:samplecomplexity} verbatim, down
+to the loss-dependent refinement ($L_\infty$ recovery costs $\log r$ rather than
+$r$). The singleton is a gold-labeled example, an instance whose true label is known,
+the diagonal measurement that prices each confounded direction. On the
+\cref{thm:sensitivity} side, the gold-free glass ceiling of
+\citet{towell2026weaksupcoarsening} is the $r > 0$, $\delta$-unidentified endpoint
+that the singleton budget collapses.
+
+\subsection{Electronic phenotyping: informative coding}
+\label{sec:inst-phenotype}
+
+The latent $\Y$ is a patient's true clinical state and the report is the set of
+diagnosis codes \citep{towell2026phenotypecoarsening}. C2 fails under informative
+coding, when the probability of coding a true case increases with disease severity,
+so the tilt $h$ is severity-correlated coding with scalar magnitude the coding-slope
+$|b_1|$ (its $\delta$). The sensitivity bound \eqref{eq:Bdelta} is that paper's
+\emph{informative-coding bias bound} (its \texttt{thm:bias-informative}): the gap
+between the average-severity coding probability and the cohort sensitivity is at most
+$|b_1|\,\sigma_{S,1}/4$, the explicit $\delta B(\theta^\star)$ in which the severity
+spread $\sigma_{S,1}$ plays the role of the score-tilt covariance. For
+\cref{thm:restoration} the confounded direction is the prevalence-sensitivity
+trade-off the codes cannot resolve, and the margin $\gamma$ is the case-mix gap
+between the chart-reviewed subsample and the cohort. The singleton is a
+chart-reviewed patient, a record whose true state is adjudicated; the
+chart-review-calibrated estimator of \citet{towell2026phenotypecoarsening} is the
+Rogan-Gladen correction, the $r = 1$ instance of the singleton budget.
