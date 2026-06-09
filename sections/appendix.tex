@@ -1,0 +1,133 @@
+\appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+Throughout, $\bar g(r; \theta) = \int_{c(r)} g(y \mid \theta)\, d\nu(y)$ is the
+face-value report density (the $\delta = 0$ law, up to the C2-symmetric weight
+$\kappa_0(r)$, which is $\theta$-free by C3 and cancels from the score), and
+$s(r; \theta) = \partial_\theta \log \bar g(r; \theta)$ is the face-value score.
+The data are drawn from the $\delta$-tilted law of \cref{def:tilt},
+\begin{equation}
+  p_\delta(r; \theta) \;\propto\; \int_{c(r)} g(y \mid \theta)\, e^{\delta h(r,y)}\,
+    d\nu(y),
+  \label{eq:app-tilted}
+\end{equation}
+and $P_0$ denotes the joint law of $(Y, R)$ at $\delta = 0$, $\theta = \theta^\star$.
+We use the standard $M$-estimation regularity of \citet[Ch.~5]{vandervaart1998asymptotic}:
+the map $\theta \mapsto s(r; \theta)$ is continuous and dominated by a $P_0$-integrable
+envelope uniformly over $\delta$ in a neighborhood of $0$; $\Info(\theta^\star) =
+\E_{P_0}[s s^\top]$ is finite and nonsingular; and $\Psi(\theta, \delta) :=
+\E_{p_\delta}[s(R; \theta)]$ has a well-separated zero. These are the conditions the
+sketches in \cref{sec:sensitivity,sec:restoration} defer.
+
+\subsection{The sensitivity bound}
+\label{app:sensitivity}
+
+\begin{proof}[Proof of \cref{thm:sensitivity}]
+The analyst's estimator $\hat\theta_n$ solves $\frac1n \sum_i s(R_i; \theta) = 0$
+with the $R_i$ drawn from $p_\delta(\cdot; \theta^\star)$. Under the stated
+regularity, $\Psi(\theta, \delta)$ is continuous with a well-separated zero
+$\theta_\delta$ and $\hat\theta_n \to_p \theta_\delta$ by
+\citet[Thm~5.9]{vandervaart1998asymptotic}, with $\theta_0 = \theta^\star$ because at
+$\delta = 0$ the data law is the face-value model itself, so $\E_{P_0}[s(R;
+\theta^\star)] = 0$.
+
+The envelope justifies differentiating under the integral, so $\Psi$ is $C^1$ near
+$(\theta^\star, 0)$ and we compute its two partials there. In $\theta$, correct
+specification at $\delta = 0$ gives the second Bartlett identity,
+\begin{equation}
+  \partial_\theta \Psi(\theta^\star, 0)
+  = \E_{P_0}\!\big[\partial_\theta s(R; \theta^\star)\big]
+  = -\,\E_{P_0}\!\big[s\, s^\top\big]
+  = -\,\Info(\theta^\star).
+  \label{eq:app-bartlett}
+\end{equation}
+In $\delta$, write the tilted report density as $p_\delta(r; \theta^\star) = \bar
+g(r; \theta^\star)\, w_\delta(r) / W_\delta$, where $w_\delta(r) = \E_{P_0}[\,
+e^{\delta h(R, Y)} \mid R = r\,]$ is the candidate-set-conditional mean of the tilt
+weight and $W_\delta = \E_{P_0}[w_\delta(R)]$ normalizes. Differentiating at $\delta
+= 0$ gives $\partial_\delta \log p_\delta(r; \theta^\star)|_0 = \bar h(r) -
+\E_{P_0}[\bar h(R)]$ with $\bar h(r) = \E_{P_0}[\, h(R, Y) \mid R = r\,]$ the
+conditional tilt, so
+\begin{equation}
+  \partial_\delta \Psi(\theta^\star, 0)
+  = \E_{P_0}\!\big[\, s(R; \theta^\star)\,(\bar h(R) - \E_{P_0}[\bar h])\,\big]
+  = \Cov_{P_0}\!\big(s, \bar h\big),
+  \label{eq:app-deltapartial}
+\end{equation}
+using $\E_{P_0}[s] = 0$. We abbreviate $\Cov_{P_0}(s, \bar h)$ as $\Cov(s, h)$,
+understanding that the tilt enters only through its candidate-set-conditional mean
+$\bar h$.
+
+Since $\partial_\theta \Psi(\theta^\star, 0) = -\Info(\theta^\star)$ is nonsingular,
+the implicit function theorem gives $\theta_\delta$ differentiable at $0$ with
+$d\theta_\delta/d\delta|_0 = -[\partial_\theta \Psi]^{-1} \partial_\delta \Psi =
+\Info(\theta^\star)^{-1} \Cov(s, h)$, hence
+$\theta_\delta - \theta^\star = \delta\, \Info(\theta^\star)^{-1} \Cov(s, h) +
+O(\delta^2)$, which is \eqref{eq:bias}. For the bound, each coordinate satisfies
+$|\Cov(s_j, \bar h)| \le \sqrt{\Var_{P_0}(s_j)}\, \sqrt{\Var_{P_0}(\bar h)} \le
+\sqrt{\Var_{P_0}(s_j)}$, because $|\bar h| \le \|h\|_\infty \le 1$ forces
+$\Var_{P_0}(\bar h) \le 1$; therefore $\|\Cov(s, h)\| \le \sup_{\|h\|_\infty \le 1}
+\|\Cov(s, h)\| =: C(\theta^\star) < \infty$ and $\|\theta_\delta - \theta^\star\|
+\le \delta\, \|\Info(\theta^\star)^{-1}\|\, C(\theta^\star) + O(\delta^2) = \delta\,
+B(\theta^\star) + O(\delta^2)$, which is \eqref{eq:Bdelta}. The supremum is attained
+when $\bar h$ is proportional to the $L^2(P_0)$ projection of $s$ onto the
+candidate-set-measurable functions, the worst-case tilt aligned with the score.
+
+Finally, suppose the report law is a regular exponential family with natural
+statistic $\T$ and natural parameter $\eta(\theta)$, and the tilt is a function of
+$\T$. Then $e^{\delta h}$ shifts the natural parameter, $p_\delta$ is the same
+exponential family at $\eta(\theta) + \delta h$, and the pseudo-true $\theta_\delta$
+satisfies the exact mean-matching $m(\theta_\delta) = \E_{p_\delta}[\T]$ along the
+range of $\partial \eta / \partial \theta$. The first-order term \eqref{eq:bias} is
+then exact (no $O(\delta^2)$) on that range, the curved directions; the remainder is
+confined to directions outside it. This is the exactness-along-curved-directions
+statement, confirmed numerically in \cref{sec:validation}.
+\end{proof}
+
+\subsection{The singleton sample complexity}
+\label{app:restoration}
+
+\begin{proof}[Proof of \cref{thm:restoration}]
+On $V^\perp$ the augmented candidate-set matrix has full rank, so the coarsened
+reports identify $\theta$ there and we condition on that part, reducing the problem
+to estimating $\varphi = P_V \theta \in \R^r$ from the singletons. A singleton pins
+the latent value, so along a unit direction $v \in V$ it is a direct observation of
+$v^\top \varphi$ with per-singleton Fisher information $i_v \ge \gamma^2/\sigma^2$
+(signal $\gamma$, noise scale $\sigma$), and per-singleton influence-function
+variance at most $\sigma^2$.
+
+\emph{Upper bound.} Fix an orthonormal basis $e_1, \ldots, e_r$ of $V$ and allocate
+$m_k$ singletons to $e_k$, $\sum_k m_k = n_{\mathrm{s}}$. An efficient estimator
+$\hat\varphi$ has per-coordinate variance $\Var((\hat\varphi)_k) \le \sigma^2 /
+(\gamma^2 m_k)$ by the Cramer--Rao bound and asymptotic efficiency
+\citep[Ch.~8]{vandervaart1998asymptotic}. The balanced allocation $m_k =
+n_{\mathrm{s}}/r$ gives $\Var((\hat\varphi)_k) \le r \sigma^2 / (\gamma^2
+n_{\mathrm{s}})$ for every $k$, so holding each confounded direction to
+$\E[((\hat\varphi - \varphi)_k)^2] \le \eps^2$ requires $r \sigma^2 / (\gamma^2
+n_{\mathrm{s}}) \le \eps^2$, that is $n_{\mathrm{s}} \ge r \sigma^2 / (\eps^2
+\gamma^2) = \Theta(r/\gamma^2)$, which is \eqref{eq:samplecomplexity}. Balanced
+allocation is optimal: minimizing $\max_k \sigma^2/(\gamma^2 m_k)$ subject to $\sum_k
+m_k = n_{\mathrm{s}}$ equalizes the $m_k$, and minimizing the total $\sum_k
+\sigma^2/(\gamma^2 m_k)$ does so by the arithmetic-harmonic-mean inequality. Holding
+the \emph{total} squared error $\sum_k \Var((\hat\varphi)_k) \le \eps^2$ instead of
+each coordinate gives $r \cdot r\sigma^2/(\gamma^2 n_{\mathrm{s}}) \le \eps^2$, hence
+$\Theta(r^2/\gamma^2)$; the per-direction target of \eqref{eq:samplecomplexity} is
+the reading the singleton-budget interpretation, and the weak-supervision instance,
+intend.
+
+\emph{Lower bound.} Let $v^\star \in V$ be the least-identified unit direction and
+consider the two parameters $\varphi^{(0)} = \varphi^\star$ and $\varphi^{(1)} =
+\varphi^\star + 2\eps\, v^\star$. By the definition of the rank deficit, the
+coarsened reports have identical law under the two, so the only data that
+distinguish them are the $m_{v^\star}$ singletons informing $v^\star$, each
+contributing Kullback--Leibler divergence of order $(\gamma^2/\sigma^2)\eps^2$
+between the two hypotheses. By Le Cam's two-point method any estimator incurs
+squared error $\Omega(\eps^2)$ on one of the two unless the total divergence
+$m_{v^\star}(\gamma^2/\sigma^2)\eps^2$ exceeds a fixed constant, which requires
+$m_{v^\star} = \Omega(\sigma^2/(\gamma^2 \eps^2))$. The $r$ orthogonal confounded
+directions impose this independently, so $n_{\mathrm{s}} = \Omega(r \sigma^2 /
+(\eps^2 \gamma^2)) = \Omega(r/\gamma^2)$, matching the upper bound. Hence
+$n_{\mathrm{s}} = \Theta(r/\gamma^2)$.
+\end{proof}

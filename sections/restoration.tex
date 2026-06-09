@@ -15,16 +15,17 @@ Let the augmented candidate-set matrix have rank deficit $r$, so there is an
 $r$-dimensional subspace $V$ of parameter directions on which the coarsened reports
 carry no information (the confounded directions of \citet{towell2026synthesis}).
 Let $\gamma$ be the \emph{identification margin}: the smallest signal a singleton
-contributes along $V$, that is, the minimum over unit directions $v \in V$ of the
-per-singleton Fisher information for $v^\top \theta$, and let $\sigma^2$ bound the
-per-singleton variance of the restored estimator's influence function.
+contributes along $V$ (the labeling-function accuracy gap in weak supervision, the
+spike-in capture ratio in single-cell data), so that a singleton carries
+per-direction Fisher information of order $\gamma^2/\sigma^2$ for $v^\top \theta$,
+and let $\sigma^2$ bound the per-singleton influence-function variance.
 
 \begin{theorem}[Singleton sample complexity]
 \label{thm:restoration}
 Assume the conditions of \cref{thm:sensitivity}, a rank deficit $r$ with margin
 $\gamma > 0$, and singletons drawn so as to cover $V$ (each confounded direction
-receives a positive share of the singleton budget). To estimate the restored
-parameter on $V$ to expected squared error at most $\eps^2$, the number of
+receives a positive share of the singleton budget). To restore each of the $r$
+confounded directions to expected squared error at most $\eps^2$, the number of
 singletons needed is
 \begin{equation}
   n_{\mathrm{s}} \;=\; \Theta\!\left( \frac{r\, \sigma^2}{\eps^2\, \gamma^2} \right),
@@ -40,22 +41,22 @@ of $V$.
 \begin{proof}[Sketch]
 Upper bound. Restrict to $V$; the coarsened data fix $\theta$ on $V^\perp$, so the
 estimation problem is the $r$-dimensional one of recovering $P_V \theta$ from
-singletons. Each singleton is a direct observation of $Y$, hence of $P_V \theta$,
-with per-observation information at least $\gamma$ along every unit direction of
-$V$. Spreading $n_{\mathrm{s}}$ singletons across the $r$ directions gives each a
-budget $n_{\mathrm{s}}/r$ and per-coordinate error of order $\sigma^2 /(\gamma\,
-n_{\mathrm{s}}/r)$; summing the $r$ coordinates, the total squared error is of
-order $r \sigma^2 / (\gamma\, n_{\mathrm{s}})$ wait, $r^2 \sigma^2/(\gamma
-n_{\mathrm{s}})$ in the worst split and $r \sigma^2/(\gamma^2 n_{\mathrm{s}})$
-under a balanced allocation; setting the balanced expression to $\eps^2$ gives
-\eqref{eq:samplecomplexity}. Lower bound. Take two parameter values differing only
-along the least-identified unit direction $v^\star \in V$ by a gap that the
-coarsened data cannot distinguish; the singletons are the only informative
-observations, each with information at most a constant multiple of $\gamma$ for
+singletons. A singleton is a direct observation along $V$, carrying per-direction
+Fisher information of order $\gamma^2/\sigma^2$ for any unit direction. Under a
+balanced allocation, $n_{\mathrm{s}}/r$ singletons per direction give per-direction
+squared error of order $\sigma^2 /(\gamma^2\, n_{\mathrm{s}}/r) =
+r\sigma^2/(\gamma^2 n_{\mathrm{s}})$. Holding each confounded direction to $\eps^2$
+gives $n_{\mathrm{s}} = \Theta(r\sigma^2/(\eps^2\gamma^2))$, which is
+\eqref{eq:samplecomplexity}; holding the \emph{total} squared error to $\eps^2$
+instead gives $\Theta(r^2/\gamma^2)$, and the per-direction reading is the one the
+singleton-budget interpretation intends. Lower bound. Take two parameter values
+differing only along the least-identified unit direction $v^\star \in V$ by a gap
+that the coarsened data cannot distinguish; the singletons are the only informative
+observations, each carrying information of order $\gamma^2/\sigma^2$ for
 $v^{\star\top}\theta$, so distinguishing them to accuracy $\eps$ requires
 $\Omega(\sigma^2/(\eps^2 \gamma^2))$ singletons on that direction and
-$\Omega(r/\gamma^2)$ to cover all $r$. Details, including the balanced-allocation
-optimality and the constant, are in the appendix.
+$\Omega(r/\gamma^2)$ to cover all $r$. The full argument, including the
+balanced-allocation optimality, is \cref{app:restoration}.
 \end{proof}
 
 \begin{remark}[One rate, many margins]
