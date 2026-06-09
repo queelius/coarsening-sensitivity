@@ -127,13 +127,15 @@ consider the two parameters $\varphi^{(0)} = \varphi^\star$ and $\varphi^{(1)} =
 coarsened reports have identical law under the two, so the only data that
 distinguish them are the $m_{v^\star}$ singletons informing $v^\star$, each
 contributing Kullback--Leibler divergence of order $(\gamma^2/\sigma^2)\eps^2$
-between the two hypotheses. By Le Cam's two-point method any estimator incurs
+between the two hypotheses. By Le Cam's two-point method
+\citep{tsybakov2009introduction} any estimator incurs
 squared error $\Omega(\eps^2)$ on one of the two unless the total divergence
 $m_{v^\star}(\gamma^2/\sigma^2)\eps^2$ exceeds a fixed constant, which requires
 $m_{v^\star} = \Omega(\sigma^2/(\gamma^2 \eps^2))$. Under the per-direction
 (max-error) target each of the $r$ orthogonal directions must independently clear
 this two-point threshold, and a singleton informing one direction carries no
-information about another, so the budgets add: $n_{\mathrm{s}} = \Omega(r \sigma^2 /
+information about another, so the budgets add (Assouad's lemma over the $r$
+confounded directions): $n_{\mathrm{s}} = \Omega(r \sigma^2 /
 (\eps^2 \gamma^2)) = \Omega(r/\gamma^2)$, matching the upper bound. Hence
 $n_{\mathrm{s}} = \Theta(r/\gamma^2)$.
 \end{proof}
